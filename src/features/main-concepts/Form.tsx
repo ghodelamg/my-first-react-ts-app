@@ -17,7 +17,6 @@ export default class NameForm extends React.Component<MyProps, MyState> {
     const target = event.target as HTMLInputElement;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
@@ -32,7 +31,7 @@ export default class NameForm extends React.Component<MyProps, MyState> {
 
   render() {
     return (
-      
+      <form onSubmit={this.handleSubmit}>
          <Paper sx={{ p: 2, margin: 'auto', maxWidth: 500, flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={5}>
@@ -55,23 +54,36 @@ export default class NameForm extends React.Component<MyProps, MyState> {
             <Grid item xs={5}>
               <label>
                 Is going:
-                
               </label>
             </Grid>
             <Grid item xs={7}><input
-                  name="isGoing"
-                  type="checkbox"
-                  checked={this.state.isGoing as boolean}
-                  onChange={this.handleInputChange} /></Grid>
+              name="isGoing"
+              type="checkbox"
+              checked={this.state.isGoing as boolean}
+              onChange={this.handleInputChange} />
+              </Grid>
+              { this.state.value && (
+              <Grid item xs={12}>
+                Name: {this.state.value}
+              </Grid>)
+              }
+              { this.state.isGoing !== undefined && 
+              (<Grid item xs={12}>
+                Is going: { this.state.isGoing ? 'Yes': 'No'}
+              </Grid>)}
+             
+             { this.state.numberOfGuests && (
+               <Grid item xs={12}>
+                Number Of Guests: {this.state.numberOfGuests}
+              </Grid>
+             )}
+              
             <Grid item xs={12}>
               <input type="submit" value="Submit" />
             </Grid>
           </Grid>
         </Paper>
-      //   <form onSubmit={this.handleSubmit}>
-          
-        
-      // </form>
+        </form>
     );
   }
 }
