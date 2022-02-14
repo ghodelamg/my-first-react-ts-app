@@ -1,12 +1,11 @@
 import React, { FormEvent } from 'react';
-import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import HandlingEventOne from './features/main-concepts/HandlingEventOne'
 import {ConditionalRenderingOne} from './features/main-concepts/ConditionalRenderingOne';
 import './App.css';
 import { NumberList } from './features/main-concepts/ListingRenderingOne';
 import Form from './features/main-concepts/Form';
-
+import { Outlet, Link } from "react-router-dom";
 function Welcome(props: any) {
   return <h1>Hello, {props.name}</h1>;
 }
@@ -23,14 +22,24 @@ function SubmitForm() {
   );
 }
 function App() {
-  const numbers = [1, 2, 3, 4, 5];
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Form></Form>
-        <NumberList numbers={numbers} />
-        <ConditionalRenderingOne isLoggedIn={false}></ConditionalRenderingOne>
+        <nav
+          style={{
+            borderBottom: "solid 1px",
+            paddingBottom: "1rem"
+          }}
+        >
+          <Link to="/">App</Link> |{" "}
+          <Link to="/form">Form</Link>|{" "}
+          <Link to="/numbers">Numbers</Link>|{" "}
+          <Link to="/conditional-rendering">Conditional Rendering</Link>|{" "}
+          <Link to="/handling-events">Handling Events</Link>|{" "}
+          <Link to="/lifting-state-up">Lifting State Up</Link>
+        </nav>
+        <Outlet />
+        <br />
         <HandlingEventOne></HandlingEventOne>
         <Welcome name="Mukesh" />
         <SubmitForm></SubmitForm>
