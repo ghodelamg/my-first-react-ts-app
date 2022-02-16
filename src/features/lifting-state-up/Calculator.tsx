@@ -20,7 +20,7 @@ const tryConvert = (temperature: string, convert: Function) => {
   return rounded.toString();
 }
 
-export const Calculator = () =>{
+const Calculator = () =>{
   const [localState, setLocalState] = React.useState<{scale: string, temperature: string}>({scale: '', temperature: ''});
 
   const handleCelsiusChange = (temperature: string) => {
@@ -32,7 +32,7 @@ export const Calculator = () =>{
     setLocalState({scale: 'f', temperature: temperature});
   }
 
-  return  <div>
+  return  (<div>
         <TemperatureInput
           scale="c"
           temperature={localState.scale === 'f' ? tryConvert(localState.temperature, toCelsius) : localState.temperature}
@@ -43,5 +43,7 @@ export const Calculator = () =>{
           onTemperatureChange={handleFahrenheitChange} />
         <BoilingVerdict
           celsius={parseFloat(localState.scale === 'f' ? tryConvert(localState.temperature, toCelsius) : localState.temperature)} />
-      </div>
+      </div>)
 }
+
+export default Calculator

@@ -8,7 +8,7 @@ export const ListItem = (props: {value: string|number}) => {
   );
 }
 
-export function NumberList(props: {numbers: Array<string|number>}) {
+function NumberList(props: {numbers: Array<string|number>}) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) =>
     // Wrong! The key should have been specified here:
@@ -20,3 +20,4 @@ export function NumberList(props: {numbers: Array<string|number>}) {
     </ul>
   );
 }
+export default NumberList;

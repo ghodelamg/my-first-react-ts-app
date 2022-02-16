@@ -1,10 +1,7 @@
 import React, { FormEvent } from 'react';
 import { Counter } from './features/counter/Counter';
 import HandlingEventOne from './features/main-concepts/HandlingEventOne'
-import {ConditionalRenderingOne} from './features/main-concepts/ConditionalRenderingOne';
 import './App.css';
-import { NumberList } from './features/main-concepts/ListingRenderingOne';
-import Form from './features/main-concepts/Form';
 import { Outlet, Link } from "react-router-dom";
 function Welcome(props: any) {
   return <h1>Hello, {props.name}</h1>;
@@ -31,12 +28,14 @@ function App() {
             paddingBottom: "1rem"
           }}
         >
-          <Link to="/">App</Link> |{" "}
-          <Link to="/form">Form</Link>|{" "}
-          <Link to="/numbers">Numbers</Link>|{" "}
-          <Link to="/conditional-rendering">Conditional Rendering</Link>|{" "}
-          <Link to="/handling-events">Handling Events</Link>|{" "}
-          <Link to="/lifting-state-up">Lifting State Up</Link>
+          <Link to="/">App</Link> <br/>
+          <Link to="/form">Form</Link><br/>
+          <Link to="/numbers">Numbers</Link><br/>
+          <Link to="/conditional-rendering">Conditional Rendering</Link><br/>
+          <Link to="/handling-events">Handling Events</Link><br/>
+          <Link to="/lifting-state-up">Lifting State Up</Link><br/>
+          <Link to="/containment-ex-1">Composition/Inheritance - ContainMent Ex-1 (Pass all native elements)</Link><br/>
+          <Link to="/containment-ex-2">Composition/Inheritance - ContainMent Ex-2 (Custom Component As Props)</Link><br/>
         </nav>
         <Outlet />
         <br />
