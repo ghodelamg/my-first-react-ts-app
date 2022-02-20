@@ -36,6 +36,7 @@ function App() {
           <Link to="/lifting-state-up">Lifting State Up</Link><br/>
           <Link to="/containment-ex-1">Composition/Inheritance - ContainMent Ex-1 (Pass all native elements)</Link><br/>
           <Link to="/containment-ex-2">Composition/Inheritance - ContainMent Ex-2 (Custom Component As Props)</Link><br/>
+          <Link to="/context-ex-1">Context</Link><br/>
         </nav>
         <Outlet />
         <br />

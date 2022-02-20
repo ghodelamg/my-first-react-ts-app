@@ -13,6 +13,7 @@ const HandlingEventOne = lazy(() => import('./features/main-concepts/HandlingEve
 const Calculator = lazy(() => import('./features/lifting-state-up/Calculator'));
 const ContainmentEx2 = lazy(() => import('./features/composition-inheritance/ContainmentEx2'));
 const WelcomeDialog = lazy(() => import('./features/composition-inheritance/ContainmentEx1'));
+const ContextEx1 = lazy(() => import('./features/advanced-topics/ContextEx1'))
 const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
   <React.StrictMode>
@@ -28,6 +29,7 @@ ReactDOM.render(
           <Route path="lifting-state-up" element={<Calculator/>} />
           <Route path="containment-ex-1" element={<WelcomeDialog/>} />
           <Route path="containment-ex-2" element={<ContainmentEx2/>} />
+          <Route path="context-ex-1" element={<ContextEx1/>} />
         </Routes>
         </Suspense>
       </BrowserRouter>,
