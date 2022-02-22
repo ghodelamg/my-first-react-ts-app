@@ -5,6 +5,7 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 const App = lazy(() => import('./App'));
 const Form = lazy(() => import('./features/main-concepts/Form'));
 const NumberList = lazy(() => import('./features/main-concepts/ListingRenderingOne'));
@@ -15,6 +16,7 @@ const ContainmentEx2 = lazy(() => import('./features/composition-inheritance/Con
 const WelcomeDialog = lazy(() => import('./features/composition-inheritance/ContainmentEx1'));
 const ContextEx1 = lazy(() => import('./features/advanced-topics/ContextEx1'));
 const ForwardingRef = lazy(() => import('./features/advanced-topics/ForwardingRef'));
+const DisplayCounters = lazy(() => import('./features/advanced-topics/hoc/DisplayCounters'));
 const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
   <React.StrictMode>
@@ -32,6 +34,7 @@ ReactDOM.render(
           <Route path="containment-ex-2" element={<ContainmentEx2/>} />
           <Route path="context-ex-1" element={<ContextEx1/>} />
           <Route path="forwarding-ref" element={<ForwardingRef/>} />
+          <Route path="hoc-components" element={<DisplayCounters/>} />
         </Routes>
         </Suspense>
       </BrowserRouter>,

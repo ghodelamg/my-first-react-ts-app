@@ -38,6 +38,7 @@ function App() {
           <Link to="/containment-ex-2">Composition/Inheritance - ContainMent Ex-2 (Custom Component As Props)</Link><br/>
           <Link to="/context-ex-1">Context</Link><br/>
           <Link to="/forwarding-ref">Forwarding Ref</Link><br/>
+          <Link to="/hoc-components">HOC Components</Link><br/>
         </nav>
         <Outlet />
         <br />
