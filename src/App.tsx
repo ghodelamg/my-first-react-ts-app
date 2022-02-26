@@ -39,6 +39,7 @@ function App() {
           <Link to="/context-ex-1">Context</Link><br/>
           <Link to="/forwarding-ref">Forwarding Ref</Link><br/>
           <Link to="/hoc-components">HOC Components</Link><br/>
+          <Link to="/portals">Portals</Link><br/>
         </nav>
         <Outlet />
         <br />
