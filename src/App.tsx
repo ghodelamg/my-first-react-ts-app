@@ -41,6 +41,7 @@ function App() {
           <Link to="/hoc-components">HOC Components</Link><br/>
           <Link to="/portals">Portals</Link><br/>
           <Link to="/refs">Refs</Link><br/>
+          <Link to="/rendering-props">RenderingProps</Link><br/>
         </nav>
         <Outlet />
         <br />

@@ -19,6 +19,7 @@ const ForwardingRef = lazy(() => import('./features/advanced-topics/ForwardingRe
 const DisplayCounters = lazy(() => import('./features/advanced-topics/hoc/DisplayCounters'));
 const Portals = lazy(() => import('./features/advanced-topics/Portal'));
 const Refs = lazy(() => import('./features/advanced-topics/Refs'));
+const RenderingProps = lazy(() => import('./features/advanced-topics/RenderingProps'));
 const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
   <React.StrictMode>
@@ -39,6 +40,7 @@ ReactDOM.render(
           <Route path="hoc-components" element={<DisplayCounters/>} />
           <Route path="portals" element={<Portals/>} />
           <Route path="refs" element={<Refs/>} />
+          <Route path="rendering-props" element={<RenderingProps/>} />
         </Routes>
         </Suspense>
       </BrowserRouter>,
