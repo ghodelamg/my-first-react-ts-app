@@ -40,6 +40,7 @@ function App() {
           <Link to="/forwarding-ref">Forwarding Ref</Link><br/>
           <Link to="/hoc-components">HOC Components</Link><br/>
           <Link to="/portals">Portals</Link><br/>
+          <Link to="/refs">Refs</Link><br/>
         </nav>
         <Outlet />
         <br />

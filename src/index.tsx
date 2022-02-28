@@ -18,6 +18,7 @@ const ContextEx1 = lazy(() => import('./features/advanced-topics/ContextEx1'));
 const ForwardingRef = lazy(() => import('./features/advanced-topics/ForwardingRef'));
 const DisplayCounters = lazy(() => import('./features/advanced-topics/hoc/DisplayCounters'));
 const Portals = lazy(() => import('./features/advanced-topics/Portal'));
+const Refs = lazy(() => import('./features/advanced-topics/Refs'));
 const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
   <React.StrictMode>
@@ -37,6 +38,7 @@ ReactDOM.render(
           <Route path="forwarding-ref" element={<ForwardingRef/>} />
           <Route path="hoc-components" element={<DisplayCounters/>} />
           <Route path="portals" element={<Portals/>} />
+          <Route path="refs" element={<Refs/>} />
         </Routes>
         </Suspense>
       </BrowserRouter>,
