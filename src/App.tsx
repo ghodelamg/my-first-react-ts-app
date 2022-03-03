@@ -42,6 +42,7 @@ function App() {
           <Link to="/portals">Portals</Link><br/>
           <Link to="/refs">Refs</Link><br/>
           <Link to="/rendering-props">RenderingProps</Link><br/>
+          <Link to="/use-effect-ex1">Use Effect Ex1</Link><br/>
         </nav>
         <Outlet />
         <br />
