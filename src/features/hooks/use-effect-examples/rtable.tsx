@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { useList } from './useList';
 
 const columns: any = [
   { id: 'name', label: 'Name', minWidth: 170 },
@@ -50,32 +51,19 @@ const rows = [
 ];
 
 export default function StickyHeadTable() {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [tableData, setTableData] = useState([]);
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
+  const {tableData, handleChangePage, page, handleChangeRowsPerPage, rowsPerPage} = useList();
 
-  const handleChangePage = (event: any, newPage: SetStateAction<number>) => {
-    setPage(newPage);
-  };
+  // const handleChangePage = (event: any, newPage: SetStateAction<number>) => {
+  //   setPage(newPage);
+  // };
 
-  const handleChangeRowsPerPage = (event: { target: { value: string | number; }; }) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event: { target: { value: string | number; }; }) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
 
-  const fetchUnknowList = ()  => {
-       fetch('https://reqres.in/api/unknown')
-    .then(response => response.json())
-    .then(data => {
-        setTableData(data.data);
-    });
-  };
-
-useEffect(() => {
-    // Update the document title using the browser API
-    // https://reqres.in/api/unknown
-    fetchUnknowList();
-  },[]);
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
