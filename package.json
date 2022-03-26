@@ -15,13 +15,14 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "@types/react-redux": "^7.1.7",
+    "@types/react-redux": "^7.1.23",
     "eslint-plugin-react-hooks": "^4.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-redux": "^7.2.0",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "redux": "^4.1.2",
     "typescript": "~4.1.5"
   },
   "scripts": {
@@ -31,10 +32,13 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app","plugin:react-hooks/recommended"],
-     "rules": {
-      "react-hooks/rules-of-hooks": "error", 
-      "react-hooks/exhaustive-deps": "warn" 
+    "extends": [
+      "react-app",
+      "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
     }
   },
   "browserslist": {

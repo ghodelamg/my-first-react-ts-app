@@ -44,6 +44,7 @@ function App() {
           <Link to="/rendering-props">RenderingProps</Link><br/>
           <Link to="/use-effect-ex1">Use Effect Ex1</Link><br/>
           <Link to="/rtable">MUI Table</Link><br/>
+          <Link to="/posts">Posts</Link><br/>
         </nav>
         <Outlet />
         <br />

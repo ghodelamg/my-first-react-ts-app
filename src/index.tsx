@@ -22,6 +22,7 @@ const Refs = lazy(() => import('./features/advanced-topics/Refs'));
 const RenderingProps = lazy(() => import('./features/advanced-topics/RenderingProps'));
 const UseEffectEx1 = lazy(() => import('./features/hooks/use-effect-examples/ex1'));
 const MuiTable = lazy(() => import('./features/hooks/use-effect-examples/rtable'));
+const PostsList = lazy(() => import('./features/posts/PostsList'));
 const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
   <React.StrictMode>
@@ -45,6 +46,7 @@ ReactDOM.render(
           <Route path="rendering-props" element={<RenderingProps/>} />
           <Route path="use-effect-ex1" element={<UseEffectEx1/>} />
           <Route path="rtable" element={<MuiTable/>} />
+          <Route path="posts" element={<PostsList/>} />
         </Routes>
         </Suspense>
       </BrowserRouter>,
