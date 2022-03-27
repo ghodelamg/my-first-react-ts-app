@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../app/hooks'
+import { AddPostForm } from './AddPostForm'
 
 const PostsList = () => {
   const posts = useAppSelector(state => state.posts)
@@ -12,6 +13,7 @@ const PostsList = () => {
 
   return (
     <section className="posts-list">
+      <AddPostForm></AddPostForm>
       <h2>Posts</h2>
       {renderedPosts}
     </section>
