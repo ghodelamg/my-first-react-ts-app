@@ -24,6 +24,8 @@ const UseEffectEx1 = lazy(() => import('./features/hooks/use-effect-examples/ex1
 const MuiTable = lazy(() => import('./features/hooks/use-effect-examples/rtable'));
 const PostsList = lazy(() => import('./features/posts/PostsList'));
 const numbers = [1, 2, 3, 4, 5];
+const SinglePostPage = lazy( () => import('./features/posts/SinglePostPage'));
+const EditPostForm = lazy( () => import('./features/posts/EditPostForm'));
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -47,6 +49,8 @@ ReactDOM.render(
           <Route path="use-effect-ex1" element={<UseEffectEx1/>} />
           <Route path="rtable" element={<MuiTable/>} />
           <Route path="posts" element={<PostsList/>} />
+          <Route path="posts/:postId" element={<SinglePostPage />} />
+          <Route path="/editPost/:postId" element={<EditPostForm />} />
         </Routes>
         </Suspense>
       </BrowserRouter>,
