@@ -30,11 +30,13 @@ export const AddPostForm = () => {
   const onContentChanged = (e: { target: { value: React.SetStateAction<string> } }) => setContent(e.target.value)
   const onAuthorChanged = (e: { target: { value: React.SetStateAction<string> } }) => setUserId(e.target.value)
 
-  const onSavePostClicked = () => {
+  const onSavePostClicked = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     if (title && content) {
-      dispatch(postAdded(title, content, userId))
-      setTitle('')
-      setContent('')
+      dispatch(postAdded(title, content, userId));
+      setTitle('');
+      setContent('');
+      setUserId('');
     }
   }
 
