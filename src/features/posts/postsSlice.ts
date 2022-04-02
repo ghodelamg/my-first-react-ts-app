@@ -1,12 +1,34 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
-interface PostSlice {
+import { sub } from 'date-fns';
+export interface PostSlice {
   id: string;
   title: string;
   content: string;
+  userId: string;
+  date: string;
+  reactions: {
+      thumbsUp: number;
+      hooray: number;
+      heart: number;
+      rocket: number;
+      eyes: number;
+    },
 }
 const initialState: PostSlice[] = [
-  { id: '1', title: 'First Post!', content: 'Hello!' },
-  { id: '2', title: 'Second Post', content: 'More text' }
+  { id: '1', title: 'First Post!', content: 'Hello!', userId: '1', date: sub(new Date(), { minutes: 10 }).toISOString(),reactions: {
+      thumbsUp: 0,
+      hooray: 0,
+      heart: 0,
+      rocket: 0,
+      eyes: 0,
+    }, },
+  { id: '2', title: 'Second Post', content: 'More text', userId: '2', date: sub(new Date(), { minutes: 5 }).toISOString(),reactions: {
+      thumbsUp: 0,
+      hooray: 0,
+      heart: 0,
+      rocket: 0,
+      eyes: 0,
+    }, },
 ]
 
 const postsSlice = createSlice({
@@ -14,15 +36,24 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
      postAdded: {
-      reducer(state, action: PayloadAction<{ title: string, content: string, id: string }>) {
+      reducer(state, action: PayloadAction<PostSlice>) {
         state.push(action.payload)
       },
-      prepare(title, content) { //https://redux.js.org/tutorials/essentials/part-4-using-data#preparing-action-payloads
+      prepare(title, content, userId) { //https://redux.js.org/tutorials/essentials/part-4-using-data#preparing-action-payloads
         return {
           payload: {
             id: nanoid(),
+            date: new Date().toISOString(),
             title,
-            content
+            content,
+            userId: userId,
+            reactions: {
+              thumbsUp: 0,
+              hooray: 0,
+              heart: 0,
+              rocket: 0,
+              eyes: 0,
+            }
           }
         }
       }
@@ -34,10 +65,17 @@ const postsSlice = createSlice({
         existingPost.title = title
         existingPost.content = content
       }
+    },
+    reactionAdded(state, action) {
+      const { postId, reaction } = action.payload
+      const existingPost = state.find(post => post.id === postId)
+      if (existingPost) {
+        existingPost.reactions[reaction as keyof PostSlice['reactions']]++
+      }
     }
   }
 })
 
-export const { postAdded, postUpdated } = postsSlice.actions
+export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
 
 export default postsSlice.reducer
