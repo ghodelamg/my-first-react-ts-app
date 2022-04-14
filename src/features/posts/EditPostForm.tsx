@@ -8,7 +8,7 @@ import { postUpdated } from './postsSlice'
 const EditPostForm = () => {
   const {postId} = useParams();
 
-  const post = useAppSelector(state => state.posts.find((post: { id: any; }) => post.id == postId))
+  const post = useAppSelector(state => state.posts.posts.find((post: { id: any; }) => post.id == postId))
   const [title, setTitle] = useState((post as any).title)
   const [content, setContent] = useState((post as any).content)
 

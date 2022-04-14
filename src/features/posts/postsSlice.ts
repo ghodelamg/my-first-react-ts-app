@@ -2,12 +2,12 @@ import { RootState } from './../../app/store';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { client } from '../../api/client'
 export interface PostSlice {
-  id: string;
+  id?: string;
   title: string;
   content: string;
   userId: string;
-  date: string;
-  reactions: {
+  date?: string;
+  reactions?: {
       thumbsUp: number;
       hooray: number;
       heart: number;
@@ -41,7 +41,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 
 export const addNewPost = createAsyncThunk(
   'posts/addNewPost',
-  async (initialPost) => {
+  async (initialPost: PostSlice) => {
     const response = await client.post('/fakeApi/posts', initialPost)
     return response.data
   }
@@ -54,7 +54,7 @@ const postsSlice = createSlice({
     reactionAdded(state, action: PayloadAction<ReactionPayload>) {
       const { postId, reaction } = action.payload
       const existingPost = state.posts.find((post) => post.id === postId)
-      if (existingPost) {
+      if (existingPost && existingPost.reactions) {
         existingPost.reactions[reaction as keyof PostSlice['reactions']]++
       }
     },

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { postAdded } from './postsSlice'
-import { useAppSelector } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Container from '@mui/material/Container'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -16,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import Grid from '@mui/material/Grid'
+import { addNewPost } from './postsSlice'
 
 export const AddPostForm = () => {
   const [title, setTitle] = useState('');
@@ -23,7 +23,7 @@ export const AddPostForm = () => {
   const [userId, setUserId] = useState('');
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const users = useAppSelector(state => state.users)
 
   const onTitleChanged = (e: { target: { value: React.SetStateAction<string> } }) => setTitle(e.target.value)
@@ -37,7 +37,7 @@ export const AddPostForm = () => {
     if (canSave) {
       try {
         setAddRequestStatus('pending')
-        await dispatch(addNewPost({ title, content, user: userId })).unwrap()
+        await dispatch(addNewPost({ title, content, userId })).unwrap()
         setTitle('')
         setContent('')
         setUserId('')
