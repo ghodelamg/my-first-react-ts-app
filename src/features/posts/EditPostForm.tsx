@@ -2,21 +2,20 @@ import  { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
-
-import { postUpdated } from './postsSlice'
+import { PostSlice, postUpdated, selectPostById } from './postsSlice'
 
 const EditPostForm = () => {
   const {postId} = useParams();
 
-  const post = useAppSelector(state => state.posts.posts.find((post: { id: any; }) => post.id == postId))
-  const [title, setTitle] = useState((post as any).title)
-  const [content, setContent] = useState((post as any).content)
+  const post = useAppSelector((state) => selectPostById(state, postId as string))
+  const [title, setTitle] = useState((post as PostSlice).title)
+  const [content, setContent] = useState((post as PostSlice).content)
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  const onTitleChanged = (e: { target: { value: any; }; }) => setTitle(e.target.value)
-  const onContentChanged = (e: { target: { value: any; }; }) => setContent(e.target.value)
+  const onTitleChanged = (e: { target: { value: string; }; }) => setTitle(e.target.value)
+  const onContentChanged = (e: { target: { value: string; }; }) => setContent(e.target.value)
 
   const onSavePostClicked = () => {
     if (title && content) {

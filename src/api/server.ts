@@ -4,7 +4,6 @@ import { nanoid } from '@reduxjs/toolkit'
 import { faker } from '@faker-js/faker';
 import seedrandom from 'seedrandom'
 import { Client, Server as MockSocketServer } from 'mock-socket'
-import { setRandom } from 'txtgen'
 
 import { parseISO } from 'date-fns'
 import { Entity, FactoryAPI } from '@mswjs/data/lib/glossary';
@@ -41,7 +40,7 @@ if (useSeededRNG) {
   }
 
   rng = seedrandom(randomSeedString)
-  setRandom(rng)
+  // sentence(rng)
   faker.seed(seedDate.getTime())
 }
 

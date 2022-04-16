@@ -1,6 +1,6 @@
-import { useAppSelector } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { AddPostForm } from './AddPostForm'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
 import { ReactionButtons } from './ReactionButtons'
@@ -12,13 +12,25 @@ import CardActionArea from '@mui/material/CardActionArea'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
+import { fetchPosts, selectAllPosts } from './postsSlice'
+import { useEffect } from 'react'
+import CircularProgress from '@mui/material/CircularProgress';
 
 const PostsList = () => {
-  const posts = useAppSelector(state => state.posts)
-
-  const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
-  const navigate = useNavigate();
+  const posts = useAppSelector(selectAllPosts)
+  const postStatus = useAppSelector((state) => state.posts.status)
+  const error = useAppSelector((state) => state.posts.error)
+  const dispatch = useAppDispatch()
+    const navigate = useNavigate();
  const theme = createTheme();
+  useEffect(() => {
+    if (postStatus === 'idle') {
+      dispatch(fetchPosts())
+    }
+  }, [postStatus, dispatch])
+ const orderedPosts = posts
+      .slice()
+      .sort((a, b) => (b.date as string).localeCompare(a.date as string))
   const RenderedPosts = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -35,10 +47,10 @@ const PostsList = () => {
                         {post.title}
                       </Typography>
                       <Typography variant="subtitle1" paragraph>
-                        <PostAuthor userId={post.userId} />
+                        <PostAuthor userId={post.user as unknown as string} />
                       </Typography>
                       <Typography variant="subtitle1" color="text.secondary">
-                        <TimeAgo timestamp={post.date} />
+                        <TimeAgo timestamp={post.date as string} />
                       </Typography>
                       <Typography variant="subtitle1" paragraph>
                         <span className="post-content">{post.content.substring(0, 100)}</span>
@@ -63,6 +75,16 @@ const PostsList = () => {
     </ThemeProvider>
     )};
 
+  let content;
+
+  if (postStatus === 'loading') {
+    content = <div><span><CircularProgress color="inherit" sx={{ mt: 2 }}/></span><span>Loading...</span></div>;
+  } else if (postStatus === 'succeeded') {
+    content = <RenderedPosts/>
+  } else if (postStatus === 'failed') {
+    content = <div>{error}</div>
+  }
+
   return (
     <section className="posts-list">
       <Container maxWidth="lg">
@@ -72,7 +94,7 @@ const PostsList = () => {
               <AddPostForm></AddPostForm>
             </Grid>
             <Grid item xs={12} lg={8} sx={{ mt: 21 }}>
-              <RenderedPosts></RenderedPosts>
+              { content}
             </Grid>
           </Grid>
         </main>

@@ -1,10 +1,12 @@
 import { RootState } from './../../app/store';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { client } from '../../api/client'
+import { IUser } from '../user/usersSlice';
 export interface PostSlice {
   id?: string;
   title: string;
   content: string;
+  user?: IUser;
   userId: string;
   date?: string;
   reactions?: {
