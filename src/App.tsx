@@ -45,6 +45,7 @@ function App() {
           <Link to="/use-effect-ex1">Use Effect Ex1</Link><br/>
           <Link to="/rtable">MUI Table</Link><br/>
           <Link to="/posts">Posts</Link><br/>
+          <Link to="/users">Users</Link>
         </nav>
         <Outlet />
         <br />

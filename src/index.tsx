@@ -28,6 +28,8 @@ const PostsList = lazy(() => import('./features/posts/PostsList'));
 const numbers = [1, 2, 3, 4, 5];
 const SinglePostPage = lazy( () => import('./features/posts/SinglePostPage'));
 const EditPostForm = lazy( () => import('./features/posts/EditPostForm'));
+const UsersList = lazy( () => import('./features/user/UsersList'));
+const UserPage = lazy( () => import('./features/user/UserPage'));
 
 async function start() {
   await worker.start({ onUnhandledRequest: 'bypass' });
@@ -57,6 +59,8 @@ async function start() {
             <Route path="posts" element={<PostsList/>} />
             <Route path="posts/:postId" element={<SinglePostPage />} />
             <Route path="/editPost/:postId" element={<EditPostForm />} />
+            <Route path="/users" element={<UsersList />} />
+            <Route path="/users/:userId" element={<UserPage></UserPage>} />
           </Routes>
           </Suspense>
         </BrowserRouter>,

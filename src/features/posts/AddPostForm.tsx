@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Container from '@mui/material/Container'
@@ -14,7 +13,6 @@ import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
-import Grid from '@mui/material/Grid'
 import { addNewPost } from './postsSlice'
 
 export const AddPostForm = () => {
