@@ -9,12 +9,14 @@ export interface InitialState {
   date: any;
   message: string;
   user: string;
+  read: boolean
+  isNew :boolean
 }
 
-export const fetchNotifications = createAsyncThunk(
+export const fetchNotifications = createAsyncThunk<InitialState[], undefined, {state: RootState}>(
   'notifications/fetchNotifications',
   async (_, { getState }): Promise<any> => {
-    const allNotifications = selectAllNotifications(getState() as RootState)
+    const allNotifications = selectAllNotifications(getState())
     const [latestNotification]: any = allNotifications
     const latestTimestamp = latestNotification ? latestNotification.date : ''
     const response = await client.get(
@@ -27,16 +29,27 @@ export const fetchNotifications = createAsyncThunk(
 const notificationsSlice = createSlice({
   name: 'notifications',
   initialState: [] as InitialState[],
-  reducers: {},
-  extraReducers: {
-    [fetchNotifications.fulfilled.type]: (state, action: PayloadAction<InitialState[]>) => {
-      state.push(...action.payload)
-      // Sort with newest first
-      state.sort((a:any, b:any) => b.date.localeCompare(a.date))
+  reducers: {
+    allNotificationsRead(state) {
+      state.forEach(notification => {
+        notification.read = true
+      })
     }
+  },
+ extraReducers(builder) {
+    builder.addCase(fetchNotifications.fulfilled, (state, action) => {
+      state.push(...action.payload)
+      state.forEach(notification => {
+        // Any notifications we've read are no longer new
+        notification.isNew = !notification.read
+      })
+      // Sort with newest first
+      state.sort((a, b) => b.date.localeCompare(a.date))
+    })
   }
 })
 
 export default notificationsSlice.reducer
 
 export const selectAllNotifications = (state: RootState) => state.notifications
+export const { allNotificationsRead } = notificationsSlice.actions

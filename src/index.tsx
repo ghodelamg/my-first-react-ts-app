@@ -30,6 +30,7 @@ const SinglePostPage = lazy( () => import('./features/posts/SinglePostPage'));
 const EditPostForm = lazy( () => import('./features/posts/EditPostForm'));
 const UsersList = lazy( () => import('./features/user/UsersList'));
 const UserPage = lazy( () => import('./features/user/UserPage'));
+const NotificationList = lazy( () => import('./features/notifications/NotificationsList'));
 
 async function start() {
   await worker.start({ onUnhandledRequest: 'bypass' });
@@ -61,6 +62,7 @@ async function start() {
             <Route path="/editPost/:postId" element={<EditPostForm />} />
             <Route path="/users" element={<UsersList />} />
             <Route path="/users/:userId" element={<UserPage></UserPage>} />
+            <Route path="/notifications" element={<NotificationList></NotificationList>} />
           </Routes>
           </Suspense>
         </BrowserRouter>,
