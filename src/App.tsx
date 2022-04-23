@@ -36,35 +36,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <nav
-          style={{
-            borderBottom: "solid 1px",
-            paddingBottom: "1rem"
-          }}
-        >
-          <Link to="/">App</Link> <br/>
-          <Link to="/form">Form</Link><br/>
-          <Link to="/numbers">Numbers</Link><br/>
-          <Link to="/conditional-rendering">Conditional Rendering</Link><br/>
-          <Link to="/handling-events">Handling Events</Link><br/>
-          <Link to="/lifting-state-up">Lifting State Up</Link><br/>
-          <Link to="/containment-ex-1">Composition/Inheritance - ContainMent Ex-1 (Pass all native elements)</Link><br/>
-          <Link to="/containment-ex-2">Composition/Inheritance - ContainMent Ex-2 (Custom Component As Props)</Link><br/>
-          <Link to="/context-ex-1">Context</Link><br/>
-          <Link to="/forwarding-ref">Forwarding Ref</Link><br/>
-          <Link to="/hoc-components">HOC Components</Link><br/>
-          <Link to="/portals">Portals</Link><br/>
-          <Link to="/refs">Refs</Link><br/>
-          <Link to="/rendering-props">RenderingProps</Link><br/>
-          <Link to="/use-effect-ex1">Use Effect Ex1</Link><br/>
-          <Link to="/rtable">MUI Table</Link><br/>
-          <Link to="/posts">Posts</Link><br/>
-          <Link to="/users">Users</Link><br/>
-          <Link to="/notifications">Notifications ({numUnreadNotifications})</Link>
-        </nav>
-        <button className="button" onClick={fetchNewNotifications}>
-            Refresh Notifications
-          </button>
         <Outlet />
         <br />
         <HandlingEventOne></HandlingEventOne>

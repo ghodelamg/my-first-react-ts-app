@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { worker } from './api/server'
 import { fetchUsers } from './features/user/usersSlice';
+import { Navbar } from './app/Navbar';
 
 const App = lazy(() => import('./App'));
 const Form = lazy(() => import('./features/main-concepts/Form'));
@@ -39,6 +40,7 @@ async function start() {
     <React.StrictMode>
       <Provider store={store}>
         <BrowserRouter>
+        <Navbar></Navbar>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<App />} />
