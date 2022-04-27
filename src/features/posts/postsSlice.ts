@@ -1,5 +1,5 @@
 import { RootState } from './../../app/store';
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction, createSelector } from '@reduxjs/toolkit'
 import { client } from '../../api/client'
 import { IUser } from '../user/usersSlice';
 export interface PostSlice {
@@ -97,3 +97,8 @@ export const selectAllPosts = (state: RootState) => state.posts.posts
 
 export const selectPostById = (state: RootState, postId: string) =>
   state.posts.posts.find((post: PostSlice) => post.id === postId)
+
+export const selectPostsByUser = createSelector(
+  [selectAllPosts, (_state: RootState, userId: string) => userId],
+  (posts, userId) => posts.filter(post => (post.user as unknown as string) === userId)
+)

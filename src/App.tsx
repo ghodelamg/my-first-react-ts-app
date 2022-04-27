@@ -1,15 +1,9 @@
-import React, { FormEvent } from 'react';
+import { FormEvent } from 'react';
 import { Counter } from './features/counter/Counter';
 import HandlingEventOne from './features/main-concepts/HandlingEventOne'
 import './App.css';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-
-import {
-  fetchNotifications,
-  selectAllNotifications
-} from './features/notifications/notificationsSlice'
-import { useAppDispatch, useAppSelector } from './app/hooks';
 function Welcome(props: any) {
   return <h1>Hello, {props.name}</h1>;
 }
@@ -26,13 +20,6 @@ function SubmitForm() {
   );
 }
 function App() {
-  const dispatch = useAppDispatch();
-   const notifications = useAppSelector(selectAllNotifications)
-  const numUnreadNotifications = notifications.filter(n => !n.read).length
-
-  const fetchNewNotifications = () => {
-    dispatch(fetchNotifications())
-  }
   return (
     <div className="App">
       <header className="App-header">
