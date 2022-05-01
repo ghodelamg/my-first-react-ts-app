@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import { addNewPost } from './postsSlice'
+import { selectAllUsers } from '../user/usersSlice'
 
 export const AddPostForm = () => {
   const [title, setTitle] = useState('');
@@ -22,7 +23,7 @@ export const AddPostForm = () => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useAppDispatch()
-  const users = useAppSelector(state => state.users)
+  const users = useAppSelector(selectAllUsers)
 
   const onTitleChanged = (e: { target: { value: React.SetStateAction<string> } }) => setTitle(e.target.value)
   const onContentChanged = (e: { target: { value: React.SetStateAction<string> } }) => setContent(e.target.value)

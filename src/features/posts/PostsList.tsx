@@ -12,25 +12,60 @@ import CardActionArea from '@mui/material/CardActionArea'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import { fetchPosts, selectAllPosts } from './postsSlice'
+import { fetchPosts, PostSlice, selectPostById, selectPostIds } from './postsSlice'
 import { useEffect } from 'react'
 import CircularProgress from '@mui/material/CircularProgress';
+import { EntityId } from '@reduxjs/toolkit'
+
+let PostExcerpt = ({ postId }: {postId: EntityId}) => {
+  const post = useAppSelector(state => selectPostById(state, postId)) as PostSlice
+  const navigate = useNavigate();
+  
+  return (
+    <Grid item xs={12} md={6} key={post.id} >
+      <CardActionArea component="a">
+        <Card sx={{ display: 'flex' }}>
+          <CardContent sx={{ flex: 1 }}>
+            <Typography component="h2" variant="h5">
+              {post.title}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              <PostAuthor userId={post.user as unknown as string} />
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              <TimeAgo timestamp={post.date as string} />
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              <span className="post-content">{post.content.substring(0, 100)}</span>
+            </Typography>
+            <ReactionButtons post={post} />
+            <Grid sx={{ mt: 3 }} container justifyContent="flex-end" onClick={ () => navigate(`/posts/${post.id}`)}>
+              <Grid item style={{ textDecoration: 'underline' }}>
+                View Post
+                {/* <Link to={`/posts/${post.id}`} className="button muted-button">
+                  View Post
+                </Link> */}
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </CardActionArea>
+    </Grid>
+  )
+}
+
 
 const PostsList = () => {
-  const posts = useAppSelector(selectAllPosts)
+  const orderedPostIds = useAppSelector(selectPostIds)
   const postStatus = useAppSelector((state) => state.posts.status)
   const error = useAppSelector((state) => state.posts.error)
   const dispatch = useAppDispatch()
-    const navigate = useNavigate();
  const theme = createTheme();
   useEffect(() => {
     if (postStatus === 'idle') {
       dispatch(fetchPosts())
     }
   }, [postStatus, dispatch])
- const orderedPosts = posts
-      .slice()
-      .sort((a, b) => (b.date as string).localeCompare(a.date as string))
   const RenderedPosts = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -38,36 +73,8 @@ const PostsList = () => {
       <Container maxWidth="lg">
         <main>
           <Grid container spacing={4}>
-            { orderedPosts.map(post  => (
-               <Grid item xs={12} md={6} key={post.id} >
-                <CardActionArea component="a">
-                  <Card sx={{ display: 'flex' }}>
-                    <CardContent sx={{ flex: 1 }}>
-                      <Typography component="h2" variant="h5">
-                        {post.title}
-                      </Typography>
-                      <Typography variant="subtitle1" paragraph>
-                        <PostAuthor userId={post.user as unknown as string} />
-                      </Typography>
-                      <Typography variant="subtitle1" color="text.secondary">
-                        <TimeAgo timestamp={post.date as string} />
-                      </Typography>
-                      <Typography variant="subtitle1" paragraph>
-                        <span className="post-content">{post.content.substring(0, 100)}</span>
-                      </Typography>
-                      <ReactionButtons post={post} />
-                      <Grid sx={{ mt: 3 }} container justifyContent="flex-end" onClick={ () => navigate(`/posts/${post.id}`)}>
-                        <Grid item style={{ textDecoration: 'underline' }}>
-                          View Post
-                          {/* <Link to={`/posts/${post.id}`} className="button muted-button">
-                            View Post
-                          </Link> */}
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
-                </CardActionArea>
-              </Grid>
+            { orderedPostIds.map((postId)  => (
+                <PostExcerpt key={postId} postId={postId} />
             ))}
           </Grid>
         </main>
